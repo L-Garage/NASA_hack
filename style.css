@@ -1,0 +1,86 @@
+body {
+    background-image: url('img/digital-world-banner-background-remixed-from-public-domain-by-nasa.jpg');
+    background-size: cover;
+}
+
+.search-inp {
+    width: 90em;
+    height: 50px;
+    border-radius: 50px;
+    padding: 5px 20px;
+
+}
+
+.first-part {
+    margin: 7em 10em 0 10em;
+}
+
+.accueil {
+    color: #D3EFF2;
+    font-size: 20px;
+    text-decoration: none;
+    margin: 40px;
+
+}
+
+h1 {
+    font-size: 5em;
+    color: #D3EFF2;
+}
+
+h2 {
+    color: aliceblue;
+    margin: 20px;
+}
+
+span {
+    color: chocolate;
+}
+
+.btn {
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: rgba(210, 105, 30, 0.703);
+    border: rgba(210, 105, 30, 0.507);
+    margin: 5em 12em 0 12em;
+}
+
+.btn:hover {
+    background-color: #D3EFF2;
+    border-color: #D3EFF2;
+    color: black;
+}
+
+
+.size {
+    margin: 50px 150px;
+    display: none;
+
+}
+
+.elem {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 12px;
+    color: chocolate;
+    font-weight: bold;
+}
+
+input {
+    margin-top: 5px;
+    width: 60px;
+    height: 20px;
+    border-radius: 4px;
+    border: #D3EFF2;
+}
+
+.two {
+    color: chocolate;
+    background-color: black;
+    border: black;
+
+
+}

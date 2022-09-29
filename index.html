@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nasa Hack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="index.html" class="accueil"><span>Garage </span>Team</a>
+    <div class="first-part">
+        <h1>Create <span>anything</span></h1>
+        <input class="search-inp" placeholder="cat space sun moon " />
+    </div>
+    <div class="opt-elemns">
+        <button class="btn" onclick="hiddenElement()">Options</button>
+        <div class="size" id="opts">
+            <div class="elem">
+                <label>Width</label>
+                <input placeholder="40px" />
+            </div>
+            <div class="elem">
+                <label>Height</label>
+                <input placeholder="40px" />
+            </div>
+            <div class="elem">
+                <label>Number</label>
+                <input placeholder="4" />
+            </div>
+        </div>
+        <button class="btn two" id="btn">Generate</button>
+    </div>
+    <script>
+        function hiddenElement() {
+            document.getElementById("opts").style.display = "flex";
+            document.getElementById("btn").style.margin = "0px 12em";
+        }
+    </script>
+</body>
+
+</html>
