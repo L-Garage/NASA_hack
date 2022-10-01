@@ -4,63 +4,87 @@
 <head>
     <title>Nasa Hack</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
 </head>
 
-<body id="part1">
+<body>
     <section>
-        <a href="index.html" class="accueil"><span>Garage </span>Team</a>
+        <a href="index.html" class="accueil">L’Garage Team</a>
         <div class="first-part" id="part1">
-            <h1>Create <span>anything</span></h1>
-            <input class="search-inp" placeholder="cat space sun moon " />
-        </div>
-        <div class="opt-elemns">
-            <button class="btn" onclick="hiddenElement()">Options</button>
-            <div class="size" id="opts">
-                <div class="elem">
-                    <label>Width</label>
-                    <input placeholder="40px" />
-                </div>
-                <div class="elem">
-                    <label>Height</label>
-                    <input placeholder="40px" />
-                </div>
-                <div class="elem">
-                    <label>Number</label>
-                    <input placeholder="4" />
-                </div>
+            <h1>Create anything</h1>
+            <p class="detail">z, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut </p>
+            <div class="generate">
+                <input class="search-inp" placeholder="cat space sun moon " />
+                <button class="btn" id="btn" onclick="affichImg()">Generate</button>
             </div>
-            <button class="btn two" id="btn" onclick="affichImg()">Generate</button>
+        </div>
         </div>
     </section>
     <section class="Img-Affich" id="affch">
-        <span class="close">x</span>
-        <div class="img-part">
-            <h3 class="titl">your creation</h3>
-            <img src="img/dog.png" alt="dog">
+        <img class="close" src="img/Vector.png">
+        <div class="general">
+            <div class="img-part">
+                <h3 class="titl">Here it is !</h3>
+                <img class="img-generate" src="img/Galaxy.png" alt="dog">
+            </div>
+            <div class="download-part">
+                <button class="down"> &nbsp; Download <img class="vct-down" src="img/Vector-down.png"></button>
+                <div class="social-media">
+                    <div class="medias">
+                        <img class="media" src="img/facebook.png">
+                        <p class="med-p">Facebook</p>
+                    </div>
+                    <div class="medias">
+                        <img class="media" src="img/twitter.png">
+                        <p class="med-p">Twitter</p>
+                    </div>
+                    <div class="medias">
+                        <img class="media" src="img/instagram.png">
+                        <p class="med-p">Instagram</p>
+                    </div>
+                </div>
+                <!-- <img class="copy" src="img/copy.png" /> -->
+                <input class="link-down" placeholder="https://kfskfmmfl778"></input>
+
+            </div>
         </div>
-
-        <button class="btn down">Download</button>
-        <p>Dog</p>
-
     </section>
+    <section class="error" id="errr">
+        <img class="close" src="img/Vector.png">
+        <h2>Oups ...</h2>
+        <p class="err-p">We detected that your input doesn’t contain any nasa related word,
+            here is some suggestions :</p>
+        <p class="err-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        <p class="err-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        <p class="err-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+    </section>
+
+    <!-- SCRIPT -->
     <script>
         var model = document.getElementById("affch");
-        var ferme = document.getElementsByClassName("close")[0];
+        var ferme = document.getElementsByClassName("close");
         function hiddenElement() {
             document.getElementById("opts").style.display = "flex";
-            document.getElementById("btn").style.margin = "0px 12em";
-
         }
 
         function affichImg() {
             model.style.display = "block";
-            document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255,255 , 0.5)),url('img/background.jpg')";
+            document.body.style.backgroundImage = "linear-gradient(rgba(119, 26, 128, 0.3), rgba(119, 26, 128, 0.3)),url('img/back.png')";
+            document.getElementById("btn").style.display = "none";
             // 
         }
-        ferme.onclick = function (event) {
-            model.style.display = "none";
-            document.body.style.backgroundImage = "url('img/background.jpg')";
+        for (i = 0; i < 2; i++) {
+            ferme[i].onclick = function (event) {
+                model.style.display = "none";
+                document.getElementById("btn").style.display = "block";
+                document.getElementById("errr").style.display = "none";
+                document.body.style.backgroundImage = 'url("img/back.png")';
+            }
         }
+
 
     </script>
 </body>
