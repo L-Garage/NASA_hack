@@ -6,35 +6,62 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <a href="index.html" class="accueil"><span>Garage </span>Team</a>
-    <div class="first-part">
-        <h1>Create <span>anything</span></h1>
-        <input class="search-inp" placeholder="cat space sun moon " />
-    </div>
-    <div class="opt-elemns">
-        <button class="btn" onclick="hiddenElement()">Options</button>
-        <div class="size" id="opts">
-            <div class="elem">
-                <label>Width</label>
-                <input placeholder="40px" />
-            </div>
-            <div class="elem">
-                <label>Height</label>
-                <input placeholder="40px" />
-            </div>
-            <div class="elem">
-                <label>Number</label>
-                <input placeholder="4" />
-            </div>
+<body id="part1">
+    <section>
+        <a href="index.html" class="accueil"><span>Garage </span>Team</a>
+        <div class="first-part" id="part1">
+            <h1>Create <span>anything</span></h1>
+            <input class="search-inp" placeholder="cat space sun moon " />
         </div>
-        <button class="btn two" id="btn">Generate</button>
-    </div>
+        <div class="opt-elemns">
+            <button class="btn" onclick="hiddenElement()">Options</button>
+            <div class="size" id="opts">
+                <div class="elem">
+                    <label>Width</label>
+                    <input placeholder="40px" />
+                </div>
+                <div class="elem">
+                    <label>Height</label>
+                    <input placeholder="40px" />
+                </div>
+                <div class="elem">
+                    <label>Number</label>
+                    <input placeholder="4" />
+                </div>
+            </div>
+            <button class="btn two" id="btn" onclick="affichImg()">Generate</button>
+        </div>
+    </section>
+    <section class="Img-Affich" id="affch">
+        <span class="close">x</span>
+        <div class="img-part">
+            <h3 class="titl">your creation</h3>
+            <img src="img/dog.png" alt="dog">
+        </div>
+
+        <button class="btn down">Download</button>
+        <p>Dog</p>
+
+    </section>
     <script>
+        var model = document.getElementById("affch");
+        var ferme = document.getElementsByClassName("close")[0];
         function hiddenElement() {
             document.getElementById("opts").style.display = "flex";
             document.getElementById("btn").style.margin = "0px 12em";
+
         }
+
+        function affichImg() {
+            model.style.display = "block";
+            document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255,255 , 0.5)),url('img/background.jpg')";
+            // 
+        }
+        ferme.onclick = function (event) {
+            model.style.display = "none";
+            document.body.style.backgroundImage = "url('img/background.jpg')";
+        }
+
     </script>
 </body>
 
