@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nasa Hack</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section>
+        <a href="index.html" class="accueil">L’Garage Team</a>
+        <div class="first-part" id="part1">
+            <h1>Draw Your Imagination</h1>
+            <p class="detail">ML/AI techniques that allow users to enter short sentences ,displays and share the results in a creative and artistic image</p>
+            <div class="generate">
+                <div id="post-form">
+                    {% csrf_token %}
+                    <input type="text" id="textfield" name="textfield" class="search-inp"
+                        placeholder="cat space sun moon " />
+                    <button class="btn" id="btn" onclick="affichImg()">Generate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="Img-Affich active" id="affch">
+        <img class="close" src="static/img/Vector.png" />
+        <div class="general">
+            <div class="img-part">
+                <h3 class="titl">Here it is !</h3>
+
+                <img class="img-generate" src="{{link}}" alt="dog" id="imageGenerated" />
+            </div>
+            <div class="download-part">
+                <button class="down" id="button">&nbsp; Download <img class="vct-down"
+                        src="static/img/Vector-down.png" /></button>
+                <div class="social-media">
+                    <div class="medias" onclick="shareOnFacebook()">
+                        <img class="media" src="static/img/facebook.png" />
+                        <p class="med-p">Facebook</p>
+                    </div>
+                    <div class="medias" onclick="shareOnTwitter()">
+                        <img class="media" src="static/img/twitter.png" />
+                        <p class="med-p">Twitter</p>
+                    </div>
+                    <div class="medias">
+                        <img class="media" src="static/img/instagram.png" />
+                        <p class="med-p">Instagram</p>
+                    </div>
+                </div>
+                <!-- <img class="copy" src="img/copy.png" /> -->
+                <input class="link-down" id="inputLink" />
+            </div>
+        </div>
+    </section>
+    <section class="error" id="errr">
+        <img class="close" src="static/img/Vector.png" />
+        <h2>Oups ...</h2>
+        <p class="err-p">We detected that your input doesn’t contain any nasa related word, here is some suggestions :
+        </p>
+        <p class="err-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        
+    </section>
+
+    <!-- SCRIPT -->
+
+    <script>
+        let fileInput = document.getElementById('imageGenerated').getAttribute('src')
+        var model = document.getElementById('affch');
+        var ferme = document.getElementsByClassName('close');
+        function hiddenElement() {
+            document.getElementById('opts').style.display = 'flex';
+        }
+
+        function affichImg() {
+            $.ajax({
+                type: 'POST',
+                url: '/create',
+                data: {
+                    textfield: $('#textfield').val(),
+                },
+            }).then(data => {
+                if (data.startsWith('http')) {
+                    model.style.display = 'block';
+                    document.body.style.backgroundImage = "linear-gradient(rgba(119, 26, 128, 0.3), rgba(119, 26, 128, 0.3)),url('static/img/back.png')";
+                    // document.getElementById('btn').style.display = 'none';
+                    document.getElementById('imageGenerated').setAttribute('src', data);
+                    document.getElementById('inputLink').setAttribute('value', data);
+                    fileInput = document.getElementById('imageGenerated').getAttribute('src')
+                } else {
+                    data = data.split('*');
+                    document.getElementById('errr').style.display = 'block';     
+                    document.body.style.backgroundImage =  "linear-gradient(rgba(119, 26, 128, 0.3), rgba(119, 26, 128, 0.3)),url('static/img/back.png')";            
+                    const elements = document.getElementsByClassName('err-detail');
+                    while(elements.length > 0){
+                        elements[0].parentNode.removeChild(elements[0]);
+                    }
+
+                    
+                    const child = document.createElement('p');
+                    child.className = 'err-detail';
+                    child.innerText = data[0];
+
+                    document.getElementById('errr').appendChild(child);
+                    
+                }
+            });
+        }
+        for (i = 0; i < 2; i++) {
+            ferme[i].onclick = function (event) {
+                model.style.display = 'none';
+                // document.getElementById('btn').style.display = 'block';
+                document.getElementById('errr').style.display = 'none';
+                document.body.style.backgroundImage = 'url("static/img/back.png")';
+            };
+        }
+
+        downloadBtn = document.getElementById("button");
+        downloadBtn.addEventListener("click", e => {
+            e.preventDefault();
+            downloadBtn.innerText = "Downloading file...";
+            fetchFile(fileInput);
+        });
+
+        function fetchFile(url) {
+            fetch(url).then(res => res.blob()).then(file => {
+                let tempUrl = URL.createObjectURL(file);
+                const aTag = document.createElement("a");
+                aTag.href = tempUrl;
+                aTag.download = url.replace(/^.*[\\\/]/, '');
+                document.body.appendChild(aTag);
+                aTag.click();
+                downloadBtn.innerText = "Download File";
+                URL.revokeObjectURL(tempUrl);
+                aTag.remove();
+            }).catch(() => {
+                alert("Failed to download file!");
+                downloadBtn.innerText = "Download File";
+            });
+        }
+        function shareOnFacebook() {
+            const navUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + fileInput;
+            window.open(navUrl, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const navUrl =
+                'https://twitter.com/intent/tweet?text=' + fileInput;
+            window.open(navUrl, '_blank');
+        }
+    </script>
+</body>
+
+</html>

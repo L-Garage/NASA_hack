@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hellooo pretty girl</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="textfield">
+    <input class="button" type="submit" value="Add">
+    </form>
+    {{link}}
+    <img src="{{link}}" alt="image" id="imageGenerated">
+
+    <a href="" title="image"  id="button"> Dowload</a>
+
+    <button id="fb" onclick="shareOnFacebook()">FB Share</button>
+    <button id="twitter" onclick="shareOnTwitter()" >Twitter</button>
+
+    <script>
+
+    const fileInput = document.getElementById("imageGenerated").src,
+    downloadBtn = document.getElementById("button");
+
+    downloadBtn.addEventListener("click", e => {
+        e.preventDefault();
+        downloadBtn.innerText = "Downloading file...";
+        fetchFile(fileInput);
+    });
+
+    function fetchFile(url) {
+        fetch(url).then(res => res.blob()).then(file => {
+            let tempUrl = URL.createObjectURL(file);
+            const aTag = document.createElement("a");
+            aTag.href = tempUrl;
+            aTag.download = url.replace(/^.*[\\\/]/, '');
+            document.body.appendChild(aTag);
+            aTag.click();
+            downloadBtn.innerText = "Download File";
+            URL.revokeObjectURL(tempUrl);
+            aTag.remove();
+        }).catch(() => {
+            alert("Failed to download file!");
+            downloadBtn.innerText = "Download File";
+        });
+    }
+
+
+    function shareOnFacebook(){ 
+    const navUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + fileInput;
+    window.open(navUrl , '_blank');
+    }
+
+    function shareOnTwitter() {
+    const navUrl =
+        'https://twitter.com/intent/tweet?text=' + fileInput;
+    window.open(navUrl, '_blank');
+    }
+
+    
+    </script>
+    
+</body>
+</html>
