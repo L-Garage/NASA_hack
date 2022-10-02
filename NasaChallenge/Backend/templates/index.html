@@ -28,7 +28,7 @@
         </div>
     </section>
     <section class="Img-Affich active" id="affch">
-        <img class="close" src="static/img/Vector.png" />
+        <img class="close"  src="static/img/Vector.png" />
         <div class="general">
             <div class="img-part">
                 <h3 class="titl">Here it is !</h3>
@@ -116,8 +116,16 @@
                 // document.getElementById('btn').style.display = 'block';
                 document.getElementById('errr').style.display = 'none';
                 document.body.style.backgroundImage = 'url("static/img/back.png")';
+                generatebtn.innerText = "Generate";
             };
         }
+
+
+        generatebtn= document.getElementById("btn");
+        generatebtn.addEventListener("click", e => {
+            e.preventDefault();
+            generatebtn.innerText = "Loading...";
+        });
 
         downloadBtn = document.getElementById("button");
         downloadBtn.addEventListener("click", e => {
